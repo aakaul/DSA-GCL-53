@@ -1,11 +1,16 @@
-// https://leetcode.com/problems/maximum-subarray/
-package main
+package golang
 
-func KadanesAlgo(arr []int) int {
-	curSum, maxSum := arr[0], arr[0]
-	for _, cur := range arr {
-		curSum = max(cur, cur+curSum)
+import "math"
+
+func maxSubArray(arr []int) int {
+	curSum, maxSum := 0, -math.MaxInt16
+	for i := 0; i < len(arr); i++ {
+		cur := arr[i]
+		curSum += cur
 		maxSum = max(curSum, maxSum)
+		if curSum < 0 {
+			curSum = 0
+		}
 	}
 	return maxSum
 }
